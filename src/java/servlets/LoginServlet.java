@@ -37,16 +37,35 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
+        UserLogin userLogin = new UserLogin();
+                
+        if(password.isEmpty() || username.isEmpty()){
+            request.setAttribute("message", "You must fill in all fields");
+            getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").forward(request, response);
+        }
+        
+        if(userLogin.login(username, password)){
+            request.setAttribute("mainUser", username);
+            getServletContext().getRequestDispatcher("/WEB-INF/mainpage.jsp").forward(request, response);
+        }
+        
+        request.setAttribute("username", username);
+        request.setAttribute("password", password);
+        request.setAttribute("message", "Wrong Username and/or Password");
+             
         try{
             User u = new User();
             u.setPassword(password);
             u.setUsername(username);
-            
-            request.setAttribute(username, u);
+                       
         }
         catch(Exception e){
-            
+       
         }
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").
+                    forward(request, response);
+        
     }
 
 
