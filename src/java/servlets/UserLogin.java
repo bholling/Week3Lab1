@@ -11,7 +11,7 @@ package servlets;
  */
 public class UserLogin {
     
-    public boolean login (String user, String password){
-        return ((user.equals("adam") || user.equals("betty")) && password.equals("password"));
+    public boolean login (String username, String password){
+        return ((username.equals("adam") || username.equals("betty")) && password.equals("password"));
     }
 }

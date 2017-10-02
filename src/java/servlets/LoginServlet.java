@@ -24,7 +24,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").
+                forward(request, response);
         
     }
 
@@ -41,9 +42,10 @@ public class LoginServlet extends HttpServlet {
                        
         UserLogin userLogin = new UserLogin();
                 
-        if(username.isEmpty() && password.isEmpty()){
+        if(password.isEmpty() || username.isEmpty()){
             request.setAttribute("message", "You must fill in all fields");
-            getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").
+                    forward(request, response);
         }
         
         User u = new User();
@@ -53,7 +55,8 @@ public class LoginServlet extends HttpServlet {
         
         if(userLogin.login(u.getUsername(), u.getPassword())){
             request.setAttribute("mainUser", u.getUsername());
-            getServletContext().getRequestDispatcher("/WEB-INF/mainpage.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/WEB-INF/mainpage.jsp").
+                    forward(request, response);
         }
         
         
