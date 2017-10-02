@@ -41,18 +41,18 @@ public class LoginServlet extends HttpServlet {
                        
         UserLogin userLogin = new UserLogin();
                 
-        if(password.isEmpty() || username.isEmpty()){
+        if(username.isEmpty() && password.isEmpty()){
             request.setAttribute("message", "You must fill in all fields");
             getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").forward(request, response);
         }
         
         User u = new User();
-        u.setPassword(password);
         u.setUsername(username);
+        u.setPassword(password);    
         request.setAttribute("user", u);
         
-        if(userLogin.login(username, password)){
-            request.setAttribute("mainUser", username);
+        if(userLogin.login(u.getUsername(), u.getPassword())){
+            request.setAttribute("mainUser", u.getUsername());
             getServletContext().getRequestDispatcher("/WEB-INF/mainpage.jsp").forward(request, response);
         }
         
