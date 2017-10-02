@@ -37,6 +37,8 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         
+        
+                       
         UserLogin userLogin = new UserLogin();
                 
         if(password.isEmpty() || username.isEmpty()){
@@ -44,24 +46,20 @@ public class LoginServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").forward(request, response);
         }
         
+        User u = new User();
+        u.setPassword(password);
+        u.setUsername(username);
+        request.setAttribute("user", u);
+        
         if(userLogin.login(username, password)){
             request.setAttribute("mainUser", username);
             getServletContext().getRequestDispatcher("/WEB-INF/mainpage.jsp").forward(request, response);
         }
         
-        request.setAttribute("username", username);
-        request.setAttribute("password", password);
+        
         request.setAttribute("message", "Wrong Username and/or Password");
              
-        try{
-            User u = new User();
-            u.setPassword(password);
-            u.setUsername(username);
-                       
-        }
-        catch(Exception e){
-       
-        }
+        
         
         getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").
                     forward(request, response);

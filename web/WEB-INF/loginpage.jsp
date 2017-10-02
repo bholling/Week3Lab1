@@ -6,9 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<c:import url="/WEB-INF/header.html" />
+        
         <title>Login Page</title>
     </head>
     <body>
@@ -22,4 +21,4 @@
         </div>
         ${message}
     </body>
-</html>
+<c:import url="/WEB-INF/footer.html" />
