@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/WEB-INF/header.html" />
         
         <title>Login Page</title>
@@ -19,6 +19,7 @@
                 <input type ="submit" value="Login">
             </form>
         </div>
+        <br>
         ${message}
-    </body>
+    
 <c:import url="/WEB-INF/footer.html" />
