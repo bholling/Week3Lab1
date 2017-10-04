@@ -35,23 +35,28 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String username = request.getParameter("username");
+        String username = request.getParameter("user");
         String password = request.getParameter("password");
         
         
                        
         UserLogin userLogin = new UserLogin();
+        
+        
+        
                 
-        if(username.isEmpty() && password.isEmpty()){
+        if(username.isEmpty() || password.isEmpty()){
             request.setAttribute("message", "You must fill in all fields");
             getServletContext().getRequestDispatcher("/WEB-INF/loginpage.jsp").
                     forward(request, response);
         }
         
+        
         User u = new User();
         u.setUsername(username);
         u.setPassword(password);    
         request.setAttribute("user", u);
+        
         
         if(userLogin.login(u.getUsername(), u.getPassword())){
             request.setAttribute("mainUser", u.getUsername());
